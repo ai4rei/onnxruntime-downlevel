@@ -1550,12 +1550,12 @@ def generate_build_tree(
             if is_windows():
                 cflags += ["/guard:cf", "/DWIN32", "/D_WINDOWS"]
                 if not args.use_gdk:
-                    # Target Windows 10
+                    # Target Windows 7
                     cflags += [
                         "/DWINAPI_FAMILY=100",
-                        "/DWINVER=0x0A00",
-                        "/D_WIN32_WINNT=0x0A00",
-                        "/DNTDDI_VERSION=0x0A000000",
+                        "/DWINVER=0x0601",
+                        "/D_WIN32_WINNT=0x0601",
+                        "/DNTDDI_VERSION=0x06010000",
                     ]
                 # The "/profile" flag implies "/DEBUG:FULL /DEBUGTYPE:cv,fixup /OPT:REF /OPT:NOICF /INCREMENTAL:NO /FIXED:NO". We set it for satisfying a Microsoft internal compliance requirement. External users
                 # do not need to have it.

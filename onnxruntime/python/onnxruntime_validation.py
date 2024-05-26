@@ -22,9 +22,9 @@ def check_distro_info():
         __my_distro__ = __my_system__
         __my_distro_ver__ = platform.release().lower()
 
-        if __my_distro_ver__ not in ["10", "11"]:
+        if __my_distro_ver__ not in ["7", "10", "11"]:
             warnings.warn(
-                "Unsupported Windows version (%s). ONNX Runtime supports Windows 10 and above, only."
+                "Unsupported Windows version (%s). ONNX Runtime supports Windows 7 and above, only."
                 % __my_distro_ver__
             )
     elif __my_system__ == "linux":

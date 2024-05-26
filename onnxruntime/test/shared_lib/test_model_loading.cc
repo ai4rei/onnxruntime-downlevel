@@ -227,7 +227,7 @@ using ScopedFileDescriptor = ScopedResource<FileDescriptorTraits>;
 
 void FileMmap(const ORTCHAR_T* file_path, void*& mapped_base) {
 #ifdef _WIN32
-  wil::unique_hfile file_handle{CreateFile2(file_path, GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, NULL)};
+  wil::unique_hfile file_handle{CreateFileW(file_path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL)};
   ASSERT_TRUE(file_handle.get() != INVALID_HANDLE_VALUE);
 
   wil::unique_hfile file_mapping_handle{

@@ -28,7 +28,7 @@ namespace {
 
 class WindowsEnvTime : public EnvTime {
  public:
-  WindowsEnvTime() : GetSystemTimePreciseAsFileTime_(GetSystemTimePreciseAsFileTime) {}
+  WindowsEnvTime() : GetSystemTimePreciseAsFileTime_(GetSystemTimeAsFileTime) {}
 
   uint64_t NowMicros() override {
     if (GetSystemTimePreciseAsFileTime_ != NULL) {

@@ -21,8 +21,8 @@
 #pragma pop_macro("WINAPI_FAMILY")
 #pragma comment(lib, "PathCch.lib")
 #else
-#include <PathCch.h>
-#pragma comment(lib, "PathCch.lib")
+#include <shlwapi.h>
+#pragma comment(lib, "shlwapi.lib")
 #endif
 #else
 #include <libgen.h>
@@ -39,10 +39,10 @@ namespace {
 Status RemoveFileSpec(PWSTR pszPath, size_t cchPath) {
   assert(pszPath != nullptr && pszPath[0] != L'\0');
   // Remove any trailing backslashes
-  auto result = PathCchRemoveBackslash(pszPath, cchPath);
+  auto result = PathRemoveBackslashW(pszPath) != NULL ? S_OK : E_FAIL;
   if (result == S_OK || result == S_FALSE) {
     // Remove any trailing filename
-    result = PathCchRemoveFileSpec(pszPath, cchPath);
+    result = PathRemoveFileSpecW(pszPath) ? S_OK : S_FALSE;
     if (result == S_OK || result == S_FALSE) {
       // If we wind up with an empty string, turn it into '.'
       if (*pszPath == L'\0') {
@@ -53,6 +53,8 @@ Status RemoveFileSpec(PWSTR pszPath, size_t cchPath) {
     }
   }
   return Status(common::ONNXRUNTIME, common::FAIL, "unexpected failure");
+
+  UNREFERENCED_PARAMETER(cchPath);
 }
 
 }  // namespace
